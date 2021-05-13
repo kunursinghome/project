@@ -1,0 +1,113 @@
+{% extends "admin_base.html"%}
+{% block admintitle %} Create Activity {% endblock %}
+{% block admincontent %} 
+
+<form method = "POST" action = "{{ url_for('admin_register') }}">
+    {{ form.csrf_token }}
+    <div class="card-wrapper">
+        <div class="card">
+            <h1 class="center">Create / Update</h1>
+            <h1 class="center">Elderly Account</h1>
+            <form method = "POST"  name="createuser_form">
+                {{ form.csrf_token }}
+                {{ form.email.label }}
+                {{ form.email }}<br>
+                <ul>
+                    {% for error in form.email.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                {{ form.username.label }}
+                {{ form.username }}<br>
+                <ul>
+                    {% for error in form.username.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                {{ form.room_no.label }}
+                {{ form.room_no }}<br>
+                <ul>
+                    {% for error in form.room_no.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                {{ form.password.label }}
+                {{ form.password }}<br>
+                <ul>
+                    {% for error in form.password.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                {{ form.otherInfo.label }}
+                {{ form.otherInfo }}<br>
+                <ul>
+                    {% for error in form.otherInfo.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                {{ form.registerBtn() }}
+                {{ form.updateBtn() }}
+                <h6>If you update the data, you can input anything in password box and without changing the password.</h6>
+            </form>
+        </div>
+
+        <div class="card">
+            <h1 class="center">Delete</h1>
+            <h1 class="center">Elderly Account</h1>
+            <form method = "POST"  name="delete_form">
+                {{ form.csrf_token }}
+                {{ form.del_email.label }}
+                {{ form.del_email }}<br>
+                <ul>
+                    {% for error in form.del_email.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                
+                {{ form.delBtn() }}
+            </form>
+        </div>
+    </div>
+</form>
+
+{% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class=flashes>
+              {% for message in messages %}
+                <h2 class="center"><li>{{ message }}</li></h2>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+    
+          <br><br>
+    
+<h1 class="center">Elderly Account List</h1>
+          <style>
+            table, th, td {border: 1px solid black;}
+            table {width: 100%;}
+            th, td {text-align: center; color: black;}
+          </style>
+
+    <table id="table">
+        <tr>
+            <th>Elderly Email</th>
+            <th>Elderly Name</th>
+            <th>Elderly Room No.</th>
+            <th>Other Information</th>
+        </tr>
+        {% for x in list %}
+          <tr>
+            {% for y in x %}
+              <td>{{y}}</td>
+            {% endfor %}
+          </tr>              
+        {% endfor %} 
+      </table>
+      
+      <br><br>
+      <br><br>
+
+      
+
+{% endblock %}

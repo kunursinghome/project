@@ -1,0 +1,56 @@
+{% extends "base.html"%}
+{% block title %} Signup {% endblock %}
+{% block content %} 
+<div class="card-wrapper">
+
+  <div class="card">
+
+<h1>Register Page</h1>
+<form method = "POST" action = "{{ url_for('registerPage') }}">
+    {{ form.csrf_token }}
+
+
+    {{ form.email.label }}<br>
+    {{ form.email }}<br>
+    <ul>
+        {% for error in form.email.errors %}
+            <li style = "color : red;">{{ error }}</li>
+        {% endfor%}
+    </ul>
+
+
+    {{ form.username.label }}<br>
+    {{ form.username }}<br>
+    <ul>
+        {% for error in form.username.errors %}
+            <li style = "color : red;">{{ error }}</li>
+        {% endfor%}
+    </ul>
+
+
+    {{ form.password.label }}<br>
+    {{ form.password }}<br>
+    <ul>
+        {% for error in form.password.errors %}
+            <li style = "color : red;">{{ error }}</li>
+        {% endfor%}
+    </ul>
+
+
+    {{ form.secpassword.label }}<br>
+    {{ form.secpassword }}<br>
+    <ul>
+        {% for error in form.secpassword.errors %}
+            <li style = "color : red;">{{ error }}</li>
+        {% endfor%}
+    </ul>
+
+    
+    {{ form.registerBtn() }}
+</form>
+</div>
+
+</div>
+{% endblock %}
+
+

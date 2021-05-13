@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Activation{% endblock %}
+
+{% block content %}
+
+<div class="card-wrapper">
+
+    <div class="card">
+
+<h1>Activation Page</h1>
+<form method = "POST" action = "/activate/<activateToken>">
+    {{ form.csrf_token }}
+    <h1>Your account has been activated</h1>
+    <div>You will be redirected to login page in 3 seconds</div>
+{% endblock %}
+

@@ -1,0 +1,106 @@
+{% extends "admin_base.html"%}
+{% block admintitle %} Booking {% endblock %}
+{% block admincontent %} 
+<body class="center">
+    <h1>Booking Manage</h1>
+            <style>
+            table, th, td {border: 1px solid black;}
+            table {width: 100%;}
+            th, td {text-align: center; color: black;}
+          </style>
+
+          <table id="table">
+            <tr>
+                <th>Guest Username</th>
+                <th>Guest Email</th>
+                <th>Elderly Name</th>
+                <th>Elderly Room No.</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Type</th>
+                <th>Status</th>
+            </tr>
+            {% for x in list %}
+              <tr>
+                {% for y in x %}
+                  <td>{{y}}</td>
+                {% endfor %}
+              </tr>              
+            {% endfor %} 
+          </table>
+          <br><br>
+          <br><br>
+
+          <div class="card-wrapper">
+            <div class="card">
+       
+               <h1>Approve Booking</h1>
+               <br><br>
+           
+               <form method="POST">
+
+                {{ form.csrf_token }}
+
+                <label for="bookingtime">Booking Date:</label>
+                <input type="date" id="bookingDate" name="bookingDate" required>
+                 
+                <br><br>
+       
+                <label for="type">Booking Time :</label>
+                <select name="bookingTime" id="bookingTime">
+                    <option value="0930">09:30</option>
+                    <option value="1000">10:00</option>
+                    <option value="1030">10:30</option>
+                    <option value="1100">11:00</option>
+                    <option value="1130">11:30</option>
+                    <option value="1200">12:00</option>
+                    <option value="1230">12:30</option>
+                    <option value="1300">13:00</option>
+                    <option value="1330">13:30</option>
+                    <option value="1400">14:00</option>
+                    <option value="1430">14:30</option>
+                    <option value="1500">15:00</option>
+                    <option value="1530">15:30</option>
+                    <option value="1600">16:00</option>
+                    <option value="1630">16:30</option>
+                    <option value="1700">17:00</option>
+                    <option value="1730">17:30</option>
+                 </select>
+
+                 <br><br>
+           
+                 <label for="name">Guest Email</label>
+                 <input type="text" name="guestEmail" class="field" required>
+                 
+                 <label for="name">Elderly Name</label>
+                 <input type="text" name="elderly_name" class="field" required>
+                 
+                 <br><br>
+       
+                 <label for="type">Booking Status :</label>
+                 <select name="bookingStatus" id="bookingStatus">
+                   <option value="Approved">Approve</option>
+                   <option value="Rejected">Rejected</option>
+                 </select>
+                 
+                 <br><br>
+                     
+                 <input type="submit" value="Submit" class="btn1" name="addData">
+       
+                 {% with messages = get_flashed_messages() %}
+                   {% if messages %}
+                     <ul class=flashes>
+                     {% for message in messages %}
+                       <li>{{ message }}</li>
+                     {% endfor %}
+                     </ul>
+                   {% endif %}
+                 {% endwith %}
+               </form>        
+             </div>
+           </div>
+
+
+
+</body> 
+ {% endblock %}

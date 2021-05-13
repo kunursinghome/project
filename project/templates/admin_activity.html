@@ -1,0 +1,162 @@
+{% extends "admin_base.html"%}
+{% block admintitle %} Create Activity {% endblock %}
+{% block admincontent %} 
+
+<form method = "POST" action = "{{ url_for('admin_activity') }}">
+    {{ form.csrf_token }}
+    <div class="card-wrapper">
+        <div class="card">
+            <h1 class="center">Create Activity</h1>
+            <form method = "POST"  name="activityForm">
+                {{ form.csrf_token }}
+                {{ form.activityNo.label }}
+                {{ form.activityNo }}<br>
+                <ul>
+                    {% for error in form.activityNo.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+
+                {{ form.name.label }}
+                {{ form.name }}<br>
+                <ul>
+                    {% for error in form.name.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                
+                <label for="activitydate">Activity Date</label>
+                <input type="date" id="activitydate" name="activitydate" required>
+
+                <br><br>
+
+
+                <label for="activitytime">Activity Time</label>
+                <input type="time" id="activitytime" name="activitytime" required>
+
+                <br><br>
+
+                {{ form.place.label }}
+                {{ form.place }}<br>
+                <ul>
+                    {% for error in form.place.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                
+                {{ form.detail.label }}
+                {{ form.detail }}<br>
+                <ul>
+                    {% for error in form.detail.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                                                
+                {{ form.createBtn() }}
+                {{ form.updateBtn() }}
+            </form>
+        </div>
+
+        
+
+        <div class="card">
+            <h1 class="center">Delete Activity</h1>
+            <form method = "POST"  name="activityForm">
+                {{ form.csrf_token }}
+                {{ form.del_activityNo.label }}
+                {{ form.del_activityNo }}<br>
+                <ul>
+                    {% for error in form.del_activityNo.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                          
+                {{ form.delBtn() }}
+            </form>
+        </div>
+
+
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class=flashes>
+              {% for message in messages %}
+                <h2 class="center"><li>{{ message }}</li></h2>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+    
+          <br><br>
+
+    <h1 class="center">Activity List</h1>
+          <style>
+            table, th, td {border: 1px solid black;}
+            table {width: 100%;}
+            th, td {text-align: center; color: black;}
+          </style>
+
+          <table id="table">
+            <tr>
+              <th>Activity No</th>
+              <th>Activity Name</th>
+              <th>Activity Date</th>
+              <th>Activity Time</th>
+              <th>Activity Place</th>
+              <th>Activity Detail</th>
+            </tr>
+            {% for x in list1 %}
+              <tr>
+                {% for y in x %}
+                  <td>{{y}}</td>
+                {% endfor %}
+              </tr>              
+            {% endfor %} 
+          </table>
+
+          <br><br>
+          <br><br>
+
+        <div class="card-wrapper">
+            <div class="card">
+                <h1 class="center">Check Activity</h1>
+                <form method = "POST"  name="activityForm">
+                    {{ form.csrf_token }}
+                    {{ form.check_activityNo.label }}
+                    {{ form.check_activityNo }}<br>
+                    <ul>
+                        {% for error in form.check_activityNo.errors %}
+                            <li style = "color : red;">{{ error }}</li>
+                        {% endfor%}
+                    </ul>
+                              
+                    {{ form.checkBtn() }}
+                </form>
+            </div>
+        </div>
+
+        <table id="table">
+            <tr>
+              <th>Activity No</th>
+              <th>Activity Name</th>
+              <th>Elderly Name</th>
+              <th>Elderly Room No</th> 
+              <th>Status</th>             
+            </tr>
+            {% for x in list2 %}
+              <tr>
+                {% for y in x %}
+                  <td>{{y}}</td>
+                {% endfor %}
+              </tr>              
+            {% endfor %} 
+          </table>
+
+
+
+
+
+</body>
+{% endblock %}
+

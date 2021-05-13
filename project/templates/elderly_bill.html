@@ -1,0 +1,30 @@
+{% extends "elderly_base.html"%}
+{% block admintitle %} Bill {% endblock %}
+{% block admincontent %} 
+<body class="center">
+  <h1 class="center">Bill Record</h1>
+  <style>
+    table, th, td {border: 1px solid black;}
+    table {width: 100%;}
+    th, td {text-align: center; color: black;}
+  </style>
+
+  <table id="table">
+    <tr>
+      <th>Elderly Name</th>
+      <th>Room No.</th>
+      <th>Month</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+    {% for x in list %}
+      <tr>
+        {% for y in x %}
+          <td>{{y}}</td>
+        {% endfor %}
+      </tr>              
+    {% endfor %} 
+  </table>
+  <h6> If you have any questions, please feel free to find our administrator. Thank you.</h6>
+</body> 
+{% endblock %}

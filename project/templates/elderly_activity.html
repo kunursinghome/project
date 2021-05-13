@@ -1,0 +1,63 @@
+{% extends "elderly_base.html"%}
+{% block admintitle %} Activity {% endblock %}
+{% block admincontent %} 
+<body class="center">
+    <h1 class="center">Activity List</h1>
+    <style>
+      table, th, td {border: 1px solid black;}
+      table {width: 100%;}
+      th, td {text-align: center; color: black;}
+    </style>
+
+    <table id="table">
+      <tr>
+        <th>Activity No</th>
+        <th>Activity Name</th>
+        <th>Activity Date</th>
+        <th>Activity Time</th>
+        <th>Activity Place</th>
+        <th>Activity Detail</th>
+        <th>Status</th>
+      </tr>
+      {% for x in list %}
+        <tr>
+          {% for y in x %}
+            <td>{{y}}</td>
+          {% endfor %}
+        </tr>              
+      {% endfor %} 
+    </table>
+  
+    <br><br>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class=flashes>
+              {% for message in messages %}
+                <h2 class="center"><li>{{ message }}</li></h2>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+    <br><br>
+
+    <div class="card-wrapper">
+        <div class="card">
+            <h1 class="center">Join / Reject Activity</h1>
+            <form method = "POST"  name="activityForm">
+                {{ form.csrf_token }}
+                {{ form.activityNo.label }}
+                {{ form.activityNo }}<br>
+                <ul>
+                    {% for error in form.activityNo.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                
+                {{ form.joinBtn() }}
+                {{ form.rejectBtn() }}
+            </form>
+        </div>
+    </div>
+
+</body> 
+{% endblock %}

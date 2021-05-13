@@ -1,0 +1,26 @@
+{% extends "elderly_base.html"%}
+{% block admintitle %} Personal Data {% endblock %}
+{% block admincontent %} 
+<h1 class="center">Personal Data</h1>
+    <style>
+      table, th, td {border: 1px solid black;}
+      table {width: 100%;}
+      th, td {text-align: center; color: black;}
+    </style>
+
+    <table id="table">
+      <tr>
+        <th>Elderly Email</th>
+        <th>Elderly Name</th>
+        <th>Elderly Room No</th>
+        <th>Other Information</th>
+      </tr>
+      {% for x in list %}
+        <tr>
+          {% for y in x %}
+            <td>{{y}}</td>
+          {% endfor %}
+        </tr>              
+      {% endfor %} 
+    </table>
+{% endblock %}

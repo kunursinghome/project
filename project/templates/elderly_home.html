@@ -1,0 +1,37 @@
+{% extends "elderly_base.html"%}
+{% block admintitle %} Elderly {% endblock %}
+{% block admincontent %} 
+<body class="center">
+    <h1>Welcome to Elderly Page</h1>
+    <br><br>
+    <br><br>
+    <br><br>
+
+    <h1 class="center">Visit Booking</h1>
+          <style>
+            table, th, td {border: 1px solid black;}
+            table {width: 100%;}
+            th, td {text-align: center; color: black;}
+          </style>
+
+          <table id="table">
+            <tr>
+              <th>Visitor Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Type</th>
+            </tr>
+            {% for x in list %}
+              <tr>
+                {% for y in x %}
+                  <td>{{y}}</td>
+                {% endfor %}
+              </tr>              
+            {% endfor %} 
+          </table>
+          <h6> If you have any questions, please feel free to find our administrator. Thank you.</h6>
+          <br><br>
+          <br><br>
+
+</body> 
+{% endblock %}

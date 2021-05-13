@@ -1,0 +1,53 @@
+{% extends "Manager_base.html" %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block guestcontent %}
+
+<div class="card-wrapper">
+    <div class="card">
+
+<h1>Edit User</h1>
+<form method = "POST" action = "{{ url_for('editUserPage', id = id) }}">
+    {{ form.csrf_token }}
+
+
+    {{ form.email.label }}<br>
+    {{ form.email }}<br>
+    <ul>
+        {% for error in form.email.errors %}
+            <li style = "color : red;">{{ error }}</li>
+        {% endfor%}
+    </ul>
+
+
+    {{ form.username.label }}<br>
+    {{ form.username }}<br>
+    <ul>
+        {% for error in form.username.errors %}
+            <li style = "color : red;">{{ error }}</li>
+        {% endfor%}
+    </ul>
+
+
+    {{ form.password.label }}<br>
+    {{ form.password }}<br>
+    <ul>
+        {% for error in form.password.errors %}
+            <li style = "color : red;">{{ error }}</li>
+        {% endfor%}
+    </ul>
+
+
+    {{ form.role.label }}<br>
+    {{ form.role }}<br>
+    <ul>
+        {% for error in form.role.errors %}
+            <li style = "color : red;">{{ error }}</li>
+        {% endfor%}
+    </ul>
+
+    
+    {{ form.editUserBtn() }}
+</form>
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends "guest_base.html"%}
+{% block guesthead %}{% endblock %}
+{% block guesttitle %} Booking {% endblock %}
+{% block guestcontent %} 
+
+    <h1 class="center">Booking for visit or zoom</h1>
+
+    <div class="card-wrapper">
+     <div class="card">
+
+        <h1 class="center">Booking</h1>
+    
+        <form method="POST">
+
+          {{ form.csrf_token }}
+
+          <label for="name">Elderly Name</label>
+          <input type="text" name="elderly_name" class="field" required>
+          
+          <label for="room">Elderly Room No.</label>
+          <input type="text" name="elderly_room" class="field" required>
+
+          <label for="bookingtime">Booking Date:</label>
+          <input type="date" id="bookingDate" name="bookingDate" required>
+          
+          <br><br>
+
+          <label for="type">Booking Time :</label>
+          <select name="bookingTime" id="bookingTime">
+            <option value="0930">09:30</option>
+            <option value="1000">10:00</option>
+            <option value="1030">10:30</option>
+            <option value="1100">11:00</option>
+            <option value="1130">11:30</option>
+            <option value="1200">12:00</option>
+            <option value="1230">12:30</option>
+            <option value="1300">13:00</option>
+            <option value="1330">13:30</option>
+            <option value="1400">14:00</option>
+            <option value="1430">14:30</option>
+            <option value="1500">15:00</option>
+            <option value="1530">15:30</option>
+            <option value="1600">16:00</option>
+            <option value="1630">16:30</option>
+            <option value="1700">17:00</option>
+            <option value="1730">17:30</option>
+          </select>
+          
+          <br><br>
+
+          <label for="type">Booking Type :</label>
+          <select name="bookingType" id="bookingType">
+            <option value="visit">Visit</option>
+            <option value="zoom">Zoom</option>
+          </select>
+          
+          <br><br>
+              
+          <input type="submit" value="Booking" name="btn">
+
+        </form>
+     </div>
+      
+      <div class="card">  
+        <h1 class="center">Delete Booking</h1>
+
+        <form method="POST">
+
+          {{ form.csrf_token }}
+
+          <label for="name">Elderly Name</label>
+          <input type="text" name="del_elderly_name" class="field" required>
+          
+          <label for="bookingtime">Booking Date:</label>
+          <input type="date" id="del_bookingDate" name="del_bookingDate" required>
+          
+          <br><br>
+
+          <label for="type">Booking Time :</label>
+          <select name="del_bookingTime" id="del_bookingTime">
+            <option value="0930">09:30</option>
+            <option value="1000">10:00</option>
+            <option value="1030">10:30</option>
+            <option value="1100">11:00</option>
+            <option value="1130">11:30</option>
+            <option value="1200">12:00</option>
+            <option value="1230">12:30</option>
+            <option value="1300">13:00</option>
+            <option value="1330">13:30</option>
+            <option value="1400">14:00</option>
+            <option value="1430">14:30</option>
+            <option value="1500">15:00</option>
+            <option value="1530">15:30</option>
+            <option value="1600">16:00</option>
+            <option value="1630">16:30</option>
+            <option value="1700">17:00</option>
+            <option value="1730">17:30</option>
+          </select>
+          
+          <br><br>
+
+          <label for="type">Booking Type :</label>
+          <select name="del_bookingType" id="del_bookingType">
+            <option value="visit">Visit</option>
+            <option value="zoom">Zoom</option>
+          </select>
+          
+          <br><br>
+              
+          <input type="submit" value="Delete" name="btn">
+
+        </form>  
+
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class=flashes>
+              {% for message in messages %}
+                <h2 class="center"><li>{{ message }}</li></h2>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+
+        <br><br>
+        <br><br>
+        
+        <h1 class="center">Booking Record</h1>
+          <style>
+            table, th, td {border: 1px solid black;}
+            table {width: 100%;}
+            th, td {text-align: center; color: black;}
+          </style>
+
+          <table id="table">
+            <tr>
+              <th>Elderly Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Type</th>
+              <th>Status</th>
+            </tr>
+            {% for x in list %}
+              <tr>
+                {% for y in x %}
+                  <td>{{y}}</td>
+                {% endfor %}
+              </tr>              
+            {% endfor %} 
+          </table>
+          <h6> If you have any questions, please feel free to send an email to our administrator. Thank you.</h6>
+          <br><br>
+          <br><br>
+
+{% endblock %}
+{% block guestscript %}{% endblock %}

@@ -1,0 +1,170 @@
+{% extends "admin_base.html"%}
+{% block admintitle %} Activity {% endblock %}
+{% block admincontent %} 
+
+<h1 class="center">Elderly List</h1>
+<style>
+  table, th, td {border: 1px solid black;}
+  table {width: 100%;}
+  th, td {text-align: center; color: black;}
+</style>
+
+<table id="table">
+  <tr>
+    <th>Elderly Name</th>
+    <th>Elderly Room No.</th>
+    <th>Elderly Email</th>
+  </tr>
+  {% for x in list1 %}
+    <tr>
+      {% for y in x %}
+        <td>{{y}}</td>
+      {% endfor %}
+    </tr>              
+  {% endfor %} 
+</table>
+
+<br><br>
+
+<form method = "POST" action = "{{ url_for('admin_bill') }}">
+    {{ form.csrf_token }}
+    <div class="card-wrapper">
+        <div class="card">
+            <h1 class="center">Create Bill</h1>
+            <form method = "POST"  name="billForm">
+                {{ form.csrf_token }}
+                {{ form.email.label }}
+                {{ form.email }}<br>
+                <ul>
+                    {% for error in form.email.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+
+                <label for="month">Month of Bill</label>
+                <input type="month" id="month" name="month" required>
+
+                <br><br>
+
+                {{ form.price.label }}
+                {{ form.price }}<br>
+                <ul>
+                    {% for error in form.price.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+                                                                
+                {{ form.submitBtn() }}
+            </form>
+        </div>
+
+        <div class="card">
+            <h1 class="center">Update Bill</h1>
+            <form method = "POST"  name="billForm">
+                {{ form.csrf_token }}
+                {{ form.up_email.label }}
+                {{ form.up_email }}<br>
+                <ul>
+                    {% for error in form.up_email.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+
+                <label for="up_month">Month of Bill</label>
+                <input type="month" id="up_month" name="up_month" required>
+
+                <br><br>
+
+                {{ form.up_price.label }}
+                {{ form.up_price }}<br>
+                <ul>
+                    {% for error in form.up_price.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+
+                <label for="type">Status</label>
+                <select name="status" id="status">
+                <option value="notPaid">Not Paid</option>
+                <option value="paid">Paid</option>
+                </select>
+                                                
+                {{ form.updateBtn() }}
+            </form>
+        </div>
+
+        <div class="card">
+            <h1 class="center">Delete Bill</h1>
+            <form method = "POST"  name="billForm">
+                {{ form.csrf_token }}
+                {{ form.del_email.label }}
+                {{ form.del_email }}<br>
+                <ul>
+                    {% for error in form.del_email.errors %}
+                        <li style = "color : red;">{{ error }}</li>
+                    {% endfor%}
+                </ul>
+
+                <label for="del_month">Month of Bill</label>
+                <input type="month" id="del_month" name="del_month" required>
+                          
+                {{ form.delBtn() }}
+            </form>
+        </div>
+
+
+    </div>
+
+
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class=flashes>
+              {% for message in messages %}
+                <h2 class="center"><li>{{ message }}</li></h2>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+
+        <br><br>
+        <br><br>
+
+    
+    
+        <div class="card-wrapper">
+            <div class="card">
+                <h1 class="center">Check Bill</h1>
+                <form method = "POST"  name="activityForm">
+                    {{ form.csrf_token }}
+                    {{ form.check_email.label }}
+                    {{ form.check_email }}<br>
+                    <ul>
+                        {% for error in form.check_email.errors %}
+                            <li style = "color : red;">{{ error }}</li>
+                        {% endfor%}
+                    </ul>
+                              
+                    {{ form.checkBtn() }}
+                </form>
+            </div>
+        </div>
+
+        <table id="table">
+            <tr>
+              <th>Elderly Name</th>
+              <th>Elderly Room No</th>
+              <th>Month of Bill</th>
+              <th>Amount</th>
+              <th>Status</th> 
+            </tr>
+            {% for x in list2 %}
+              <tr>
+                {% for y in x %}
+                  <td>{{y}}</td>
+                {% endfor %}
+              </tr>              
+            {% endfor %} 
+          </table>
+
+{% endblock %}
+{% block guestscript %}{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "Manager_base.html" %}
+
+{% block title %}Manager{% endblock %}
+
+{% block guestcontent %}
+
+<center>
+<h1>Welcome to Manager Page</h1>
+
+<br><br>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    {{ message }}</br>
+{% endfor %}
+{% endif %}
+{% endwith %}</br>
+
+<style>
+    table, th, td {border: 1px solid black;}
+    table {width: 100%;}
+    th, td {text-align: center; color: black;}
+  </style>
+
+<h1 class="center">Account List</h1>
+
+<br>
+
+    <table>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Activation</th>
+        <th>Create Time</th>
+        <th>Last Modified Time</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.activate}}</td>
+        <td>{{user.create_time}}</td>
+        <td>{{user.last_modified_time}}</td>
+        <td><a href = "Manager/EditUser/{{user._id}}"><button>Edit</button></a></td>
+        <td>
+            <form method = "POST" action="{{ url_for('delUserPage', id = user._id) }}">
+                <input type = "hidden" name = "csrf_token" value = "{{ csrf_token() }}">
+                <input type = "submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+</center>
+{% endblock %}
